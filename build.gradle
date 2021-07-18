@@ -14,6 +14,7 @@ minecraft {
 }
 
 repositories {
+    mavenCentral()
     maven {
         url "https://oskarstrom.net/maven"
     }
@@ -26,7 +27,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 
-	modImplementation 'net.oskarstrom:DashLoader:2.0-pre2'
+	modImplementation 'net.oskarstrom:DashLoader:2.1-dev3'
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}") {
         exclude module: "fabric-loader"
         exclude group: "net.fabricmc"

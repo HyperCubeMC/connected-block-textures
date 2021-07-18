@@ -1,8 +1,6 @@
 package io.github.nuclearfarts.cbt.compat.dashloader;
 
 import com.mojang.datafixers.util.Pair;
-import io.activej.serializer.annotations.Deserialize;
-import io.activej.serializer.annotations.Serialize;
 import io.github.nuclearfarts.cbt.config.CTMConfig;
 import io.github.nuclearfarts.cbt.model.CBTBakedModel;
 import io.github.nuclearfarts.cbt.sprite.SpriteProvider;
