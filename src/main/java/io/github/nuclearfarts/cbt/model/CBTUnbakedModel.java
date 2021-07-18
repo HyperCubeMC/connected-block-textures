@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.function.Function;
 import com.mojang.datafixers.util.Pair;
 
+import io.github.nuclearfarts.cbt.compat.dashloader.DashloaderData;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.ModelBakeSettings;
 import net.minecraft.client.render.model.ModelLoader;
@@ -48,10 +49,15 @@ public class CBTUnbakedModel implements UnbakedModel {
 	public BakedModel bake(ModelLoader loader, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings rotationContainer, Identifier modelId) {
 		try {
 			List<SpriteProvider> spriteProviders = new ArrayList<>();
+			List<Pair<Sprite[],CTMConfig>> spritesOut = new ArrayList<>();
 			for(CTMConfig config : configs) {
-				spriteProviders.add(config.createSpriteProvider(config.getTileProvider().load(textureGetter)));
+				final Sprite[] sprites = config.getTileProvider().load(textureGetter);
+				spritesOut.add(Pair.of(sprites,config));
+				spriteProviders.add(config.createSpriteProvider(sprites));
 			}
-			return new CBTBakedModel(baseModel.bake(loader, textureGetter, rotationContainer, modelId), spriteProviders.toArray(new SpriteProvider[spriteProviders.size()]));
+			final CBTBakedModel cbtBakedModel = new CBTBakedModel(baseModel.bake(loader, textureGetter, rotationContainer, modelId), spriteProviders.toArray(new SpriteProvider[spriteProviders.size()]));
+			DashloaderData.sprites.put(cbtBakedModel,spritesOut);
+			return cbtBakedModel;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

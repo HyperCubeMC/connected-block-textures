@@ -33,7 +33,11 @@ public class CBTBakedModel extends ForwardingBakedModel {
 	public boolean isVanillaAdapter() {
 		return false;
 	}
-	
+
+	public BakedModel getWrapped() {
+		return wrapped;
+	}
+
 	@Override
 	public void emitBlockQuads(BlockRenderView blockView, BlockState state, BlockPos pos, Supplier<Random> randomSupplier, RenderContext context) {
 		SpriteFinder spriteFinder = SpriteFinder.get(MinecraftClient.getInstance().getBakedModelManager().getAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE));

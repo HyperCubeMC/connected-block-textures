@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "connected_block_textures",
   "version": "${version}",
-
   "name": "Connected Block Textures",
   "description": "Support for MCPatcher/Optifine-format connected textures.",
   "authors": [
@@ -11,7 +10,6 @@
   "contact": {
     "sources": "https://github.com/Nuclearfarts/connected-block-textures"
   },
-
   "license": "LGPLv3",
   "icon": "assets/connected_block_textures/icon.png",
   "environment": "client",
@@ -23,7 +21,11 @@
   "mixins": [
     "connected_block_textures.mixins.json"
   ],
-
+  "custom": {
+    "dashloader:customobject": [
+      "io.github.nuclearfarts.cbt.compat.dashloader.DashCBTBakedModel"
+    ]
+  },
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"

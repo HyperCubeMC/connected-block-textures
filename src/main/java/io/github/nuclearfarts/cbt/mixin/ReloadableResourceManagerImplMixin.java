@@ -24,7 +24,7 @@ public abstract class ReloadableResourceManagerImplMixin implements ReloadableRe
 	@Shadow
 	public abstract void addPack(ResourcePack resourcePack);
 
-	@Inject(method = "reload", at = @At(value = "RETURN", shift = At.Shift.BEFORE))
+	@Inject(method = "reload", at = @At(value = "INVOKE",target = "Ljava/util/List;iterator()Ljava/util/Iterator;", shift = At.Shift.AFTER))
 	private void injectCBTPack(Executor prepareExecutor, Executor applyExecutor, CompletableFuture<Unit> initialStage, List<ResourcePack> packs, CallbackInfoReturnable<ResourceReload> cir) {
 		ConnectedBlockTextures.RESOURCE_PACK_PRIORITY_MAP.clear();
 		for(int i = 0; i < packs.size(); i++) {

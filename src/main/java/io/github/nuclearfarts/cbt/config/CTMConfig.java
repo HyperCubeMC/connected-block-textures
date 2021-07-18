@@ -9,6 +9,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import io.github.nuclearfarts.cbt.compat.dashloader.DashloaderData;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.SpriteIdentifier;
@@ -32,11 +33,11 @@ public interface CTMConfig extends Comparable<CTMConfig> {
 	int getResourcePackPriority();
 	int getWeight();
 	String getFileName();
-	
+
 	static void registerConfigLoader(String formatName, Loader<?> loader) {
 		PrivateConstants.CTM_CONFIG_LOADERS.put(formatName, loader);
 	}
-	
+
 	static CTMConfig load(Properties properties, Identifier location, ResourceManager manager, String packName) throws IOException {
 		Loader<?> loader;
 		if((loader = PrivateConstants.CTM_CONFIG_LOADERS.get(properties.getProperty("method"))) != null) {
@@ -44,19 +45,21 @@ public interface CTMConfig extends Comparable<CTMConfig> {
 		}
 		throw new IllegalArgumentException("Invalid or unsupported CTM method " + properties.getProperty("method"));
 	}
-	
+
 	static CTMConfig load(Identifier propertiesLocation, ResourceManager manager) throws IOException {
 		Properties properties = new Properties();
 		Resource resource = manager.getResource(propertiesLocation);
 		properties.load(resource.getInputStream());
-		return CTMConfig.load(properties, propertiesLocation, manager, resource.getResourcePackName());
+		final CTMConfig configOut = CTMConfig.load(properties, propertiesLocation, manager, resource.getResourcePackName());
+		DashloaderData.configLocations.put(configOut, propertiesLocation);
+		return configOut;
 	}
 
 	@FunctionalInterface
 	public interface Loader<T extends CTMConfig> {
 		T load(Properties properties, Identifier location, ResourceManager manager, String packName) throws IOException;
 	}
-	
+
 	public static final class PrivateConstants {
 		private PrivateConstants() { }
 		private static final Map<String, Loader<?>> CTM_CONFIG_LOADERS = new HashMap<>();
