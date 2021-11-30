@@ -42,7 +42,7 @@ public class DynamicBookshelfTileLoader implements TileLoader {
 
 	private void copyVLine(NativeImage on, int srcX, int srcY, int height, int dstX, int dstY) {
 		for(int i = 0; i < height; i++) {
-			on.setPixelColor(dstX, dstY + i, on.getPixelColor(srcX, srcY + i));
+			on.setColor(dstX, dstY + i, on.getColor(srcX, srcY + i));
 		}
 	}
 }

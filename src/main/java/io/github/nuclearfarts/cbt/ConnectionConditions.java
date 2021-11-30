@@ -13,7 +13,7 @@ public enum ConnectionConditions implements BiPredicate<BlockState, BlockState> 
 	MATERIAL((t, o) -> t.getMaterial() == o.getMaterial()),
 	TILE((t, o) -> {
 		BlockModels models = MinecraftClient.getInstance().getBakedModelManager().getBlockModels();
-		return models.getSprite(t) == models.getSprite(o);
+		return models.getModelParticleSprite(t) == models.getModelParticleSprite(o);
 	});
 
 	private final BiPredicate<BlockState, BlockState> func;

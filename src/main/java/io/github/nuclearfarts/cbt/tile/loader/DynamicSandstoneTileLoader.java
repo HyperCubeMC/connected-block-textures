@@ -17,7 +17,7 @@ public class DynamicSandstoneTileLoader implements TileLoader {
 		NativeImage sandstone = NativeImage.read(manager.getResource(new Identifier(properties.getProperty("cbt_special_sandstone_texture"))).getInputStream());
 		for(int x = 0; x < 16; x++) {
 			for(int y = 0; y < 3; y++) {
-				sandstone.setPixelColor(15 - x, y, sandstone.getPixelColor(x, y + 12));
+				sandstone.setColor(15 - x, y, sandstone.getColor(x, y + 12));
 			}
 		}
 		tiles[0] = new ImageBackedTile(sandstone);

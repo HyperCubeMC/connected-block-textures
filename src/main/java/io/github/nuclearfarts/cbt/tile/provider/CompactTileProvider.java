@@ -107,7 +107,7 @@ public class CompactTileProvider implements TileProvider {
 		int y = h * offsetY;
 		for(int i = x; i < w + x; i++) {
 			for(int j = y; j < h + y; j++) {
-				dst.setPixelColor(i, j, src.getPixelColor(i, j));
+				dst.setColor(i, j, src.getColor(i, j));
 			}
 		}
 	}

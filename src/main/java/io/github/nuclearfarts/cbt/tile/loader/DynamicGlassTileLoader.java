@@ -52,13 +52,13 @@ public class DynamicGlassTileLoader implements TileLoader {
 
 	private static void hLine(NativeImage image, int xStart, int y, int length, int color) {
 		for(int x = 0; x < length; x++) {
-			image.setPixelColor(x + xStart, y, color);
+			image.setColor(x + xStart, y, color);
 		}
 	}
 	
 	private static void vLine(NativeImage image, int x, int yStart, int length, int color) {
 		for(int y = 0; y < length; y++) {
-			image.setPixelColor(x, y + yStart, color);
+			image.setColor(x, y + yStart, color);
 		}
 	}
 }

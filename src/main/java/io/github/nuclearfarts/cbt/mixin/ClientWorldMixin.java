@@ -21,6 +21,6 @@ public class ClientWorldMixin {
 	
 	@Inject(method = "<init>", at = @At("RETURN"))
 	private void cachePls(CallbackInfo callback) {
-		colorCache.defaultReturnValue(new ColorCacheHack());
+		colorCache.defaultReturnValue(new ColorCacheHack(null));
 	}
 }
